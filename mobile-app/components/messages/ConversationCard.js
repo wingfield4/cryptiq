@@ -49,14 +49,12 @@ export default connect(state => ({
 const styles = StyleSheet.create({
   container: {
     padding: 8,
-    height: 64,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
   },
   messageCountText: {
-    fontSize: 12,
-    marginTop: 4
+    fontSize: 12
   },
   userName: {
     fontSize: 18

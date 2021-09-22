@@ -1,18 +1,33 @@
 import React from 'react';
 import {
-  StyleSheet
+  ScrollView,
+  StyleSheet,
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import Logo from '../components/common/Logo';
 import PageContainer from '../components/common/PageContainer';
 import Text from '../components/common/Text';
 
 const Privacy = (props) => {
   return (
-    <PageContainer style={styles.container}>
-      <Text>
-        Here's some text about how we value privacy blah blah blah
-      </Text>
+    <PageContainer>
+      <ScrollView
+        bounces={false}
+        contentContainerStyle={styles.container}
+      >
+        <Logo />
+        <View style={styles.textContainer}>
+          <Text style={styles.logoText}>
+            crypt<Text style={{ ...styles.logoText, color: props.colors.accent3 }}>iq</Text>
+          </Text>
+        </View>
+        <View style={{ ...styles.divider, backgroundColor: props.colors.border }} />
+        <Text>
+          Cryptiq values your private or whatever blah blah blah. Here's how we do it
+        </Text>
+      </ScrollView>
     </PageContainer>
   )
 }
@@ -24,6 +39,20 @@ export default connect(state => ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8
+    flex: 1,
+    alignItems: 'center'
+  },
+  divider: {
+    height: 1,
+    width: '75%',
+    marginTop: 16,
+    marginBottom: 16
+  }, 
+  logoText: {
+    fontSize: 48,
+    fontFamily: 'Source Sans Pro'
+  },
+  textContainer: {
+    marginTop: 32
   }
 });

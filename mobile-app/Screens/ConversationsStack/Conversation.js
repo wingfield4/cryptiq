@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { LayoutAnimation } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import BackButton from '../../components/common/BackButton';
 import MessageInput from '../../components/messages/MessageInput';
 import MessageList from '../../components/messages/MessageList';
 import PageContainer from '../../components/common/PageContainer';
@@ -17,6 +19,33 @@ const Conversation = (props) => {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState(null);
   const [activeListenerId] = useState(generateId());
+  const navigation = useNavigation();
+
+  /* CONTROL BACK BUTTON IN HEADER */
+  useEffect(() => {
+    console.log('hereakjsdbfiahjbdsf');
+
+    //add an animation cause it's fun
+    LayoutAnimation.configureNext(
+      LayoutAnimation.create(
+        300,
+        LayoutAnimation.Types.easeInEaseOut,
+        LayoutAnimation.Properties.opacity
+      )
+    );
+
+    //set up back button
+    navigation.getParent().setOptions(({
+      headerLeft: () => <BackButton />
+    }));
+
+    //remove back button on unmount
+    return () => {
+      navigation.getParent().setOptions(({
+        headerLeft: null
+      }));
+    }
+  }, []);
 
   /* ADD AND UPDATE OUR EVENT AS NECCESSARY */
   useEffect(() => {

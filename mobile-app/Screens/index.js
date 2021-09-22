@@ -4,11 +4,11 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
 import Account from './Account';
+import BackButton from '../components/common/BackButton';
 import ConversationsStack from './ConversationsStack';
+import Icon from '../components/common/Icon';
 import Privacy from './Privacy';
 import Settings from './Settings';
-
-import Icon from '../components/common/Icon';
 
 const Screens = ({ colorMode, colors }) => {
   const theme = {
@@ -25,13 +25,23 @@ const Screens = ({ colorMode, colors }) => {
   };
 
   return (
-    <NavigationContainer theme={theme}>
-      <Tab.Navigator initialRouteName="Conversations">
+    <NavigationContainer
+      theme={theme}
+    >
+      <Tab.Navigator
+        initialRouteName="Conversations"
+        backBehavior="none"
+        screenOptions={{
+          headerTitleStyle: {
+            //fontFamily: 'Source Sans Pro',
+          }
+        }}
+      >
 
         <Tab.Screen
           name="Conversations"
           component={ConversationsStack}
-          options={{
+          options={({ navigation, route }) => ({
             tabBarIcon: ({ focused, size }) => (
               <Icon 
                 name="message-text" 
@@ -39,7 +49,7 @@ const Screens = ({ colorMode, colors }) => {
                 color={focused ? colors.accent1 : colors.captionText} 
               />
             )
-          }}
+          })}
         />
 
         <Tab.Screen

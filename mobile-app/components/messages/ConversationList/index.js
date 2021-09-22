@@ -19,7 +19,6 @@ const ConversationList = (props) => {
   ];
 
   props.users.forEach(user => {
-    console.log('user.mostRecentInteraction)', user.mostRecentInteraction);
     let mostRecentInteraction = moment(user.mostRecentInteraction);
     
     if(mostRecentInteraction.isAfter(moment().subtract(1, 'day'))) {

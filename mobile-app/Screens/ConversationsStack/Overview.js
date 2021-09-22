@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import ConversationList from '../../components/messages/ConversationList';
 import PageContainer from '../../components/common/PageContainer';
@@ -18,10 +19,22 @@ const Overview = (props) => {
         return;
   
       /* TODO handle case where message is from or to new user */
-      setUsers(users.map(user => ({
+
+      //udpate existing users
+      let newUsers = users.map(user => ({
         ...user,
-        messageCount: message.sentFrom === user.id || message.sentTo === user.id ? user.messageCount + 1 : user.messageCount
-      })));
+        messageCount: message.sentFrom === user.id || message.sentTo === user.id ? user.messageCount + 1 : user.messageCount,
+        mostRecentInteraction: message.sentFrom === user.id || message.sentTo === user.id ? message.sentAt : user.mostRecentInteraction
+      }));
+
+      // sort by most recent insteraction
+      newUsers.sort((a, b) => {
+        if(moment(a.mostRecentInteraction).isAfter(moment(b.mostRecentInteraction))) return -1;
+        if(moment(b.mostRecentInteraction).isAfter(moment(a.mostRecentInteraction))) return 1;
+        return 0;
+      });
+
+      setUsers(newUsers);
     }
 
     if(activeListenerId) {

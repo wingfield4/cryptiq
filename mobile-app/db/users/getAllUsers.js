@@ -27,7 +27,6 @@ const getAllUsers = async () => {
     thisUserId
   ]);
 
-  console.log('users', users);
   return users;
 }
 

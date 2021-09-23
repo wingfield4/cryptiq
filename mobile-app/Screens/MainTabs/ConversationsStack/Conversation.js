@@ -4,15 +4,15 @@ import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import BackButton from '../../components/common/BackButton';
-import MessageInput from '../../components/messages/MessageInput';
-import MessageList from '../../components/messages/MessageList';
-import PageContainer from '../../components/common/PageContainer';
-import Text from '../../components/common/Text';
+import BackButton from '../../../components/common/BackButton';
+import MessageInput from '../../../components/messages/MessageInput';
+import MessageList from '../../../components/messages/MessageList';
+import PageContainer from '../../../components/common/PageContainer';
+import Text from '../../../components/common/Text';
 
-import addMessage from '../../db/messages/addMessage';
-import generateId from '../../utilities/generateId';
-import getMessagesFromUser from '../../db/messages/getMessagesFromUser';
+import addMessage from '../../../db/messages/addMessage';
+import generateId from '../../../utilities/generateId';
+import getMessagesFromUser from '../../../db/messages/getMessagesFromUser';
 
 const Conversation = (props) => {
   const [error, setError] = useState(null);

@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import PageContainer from '../components/common/PageContainer';
-import Text from '../components/common/Text';
+import PageContainer from '../../components/common/PageContainer';
+import Text from '../../components/common/Text';
 
 const Settings = (props) => {
   return (

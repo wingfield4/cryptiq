@@ -6,9 +6,9 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import Logo from '../components/common/Logo';
-import PageContainer from '../components/common/PageContainer';
-import Text from '../components/common/Text';
+import Logo from '../../components/common/Logo';
+import PageContainer from '../../components/common/PageContainer';
+import Text from '../../components/common/Text';
 
 const Privacy = (props) => {
   return (

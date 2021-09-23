@@ -19,6 +19,7 @@
 		2CFCD9A7F40945EABE3FD6A6 /* SourceSansPro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE41D7F35681492D9DD91F49 /* SourceSansPro-ExtraLight.ttf */; };
 		383F0E45AAECC96EC1240616 /* libPods-SecureMessenger.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA95E558A08EEE8F1388B1 /* libPods-SecureMessenger.a */; };
 		43C0FE919ACC465388604AAB /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6D347D0371B4D64AF084FFB /* SourceSansPro-Bold.ttf */; };
+		6326C4E026FC102400EB2643 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 6326C4DF26FC102400EB2643 /* main.jsbundle */; };
 		69AE43B77E8A4AD79251103B /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B22DCE9FFED548139839235C /* SourceSansPro-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8501DE78D9454B33BA388065 /* SourceSansPro-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B59FC1BE03434B92BEC8F3F7 /* SourceSansPro-SemiBoldItalic.ttf */; };
@@ -61,6 +62,7 @@
 		528321F8E43E4A979D864891 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		5BE589CB122FB2E3380C52E9 /* Pods-SecureMessenger-SecureMessengerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecureMessenger-SecureMessengerTests.release.xcconfig"; path = "Target Support Files/Pods-SecureMessenger-SecureMessengerTests/Pods-SecureMessenger-SecureMessengerTests.release.xcconfig"; sourceTree = "<group>"; };
 		61D7E90BBB254D7DAC6B5F27 /* SourceSansPro-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-ExtraLightItalic.ttf"; path = "../assets/fonts/SourceSansPro-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		6326C4DF26FC102400EB2643 /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		647CA57BA7E13DFF0534EADD /* libPods-SecureMessenger-SecureMessengerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SecureMessenger-SecureMessengerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69C710BC3F3E4275A1EF6E41 /* SourceSansPro-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-BlackItalic.ttf"; path = "../assets/fonts/SourceSansPro-BlackItalic.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SecureMessenger/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				6326C4DF26FC102400EB2643 /* main.jsbundle */,
 				13B07FAE1A68108700A75B9A /* SecureMessenger */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SecureMessengerTests */,
@@ -318,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6326C4E026FC102400EB2643 /* main.jsbundle in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				0B10A2AA0DFB4D589FEB03D6 /* SourceSansPro-Black.ttf in Resources */,
@@ -530,6 +534,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/swift",
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -554,6 +562,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/swift",
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -572,11 +584,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T3L625VRQ3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SecureMessenger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/swift",
+					"$(inherited)",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -598,10 +615,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T3L625VRQ3;
 				INFOPLIST_FILE = SecureMessenger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/swift",
+					"$(inherited)",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

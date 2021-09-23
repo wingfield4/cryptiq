@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import ConversationList from '../../components/messages/ConversationList';
-import PageContainer from '../../components/common/PageContainer';
+import ConversationList from '../../../components/messages/ConversationList';
+import PageContainer from '../../../components/common/PageContainer';
 
-import generateId from '../../utilities/generateId';
-import getAllUsers from '../../db/users/getAllUsers';
+import generateId from '../../../utilities/generateId';
+import getAllUsers from '../../../db/users/getAllUsers';
 
 const Overview = (props) => {
   const [users, setUsers] = useState(null);

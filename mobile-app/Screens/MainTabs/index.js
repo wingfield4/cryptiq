@@ -15,7 +15,7 @@ const Screens = ({ colorMode, colors }) => {
     ...DefaultTheme,
     dark: colorMode === 'dark',
     colors: {
-      primary: colors.accent1,
+      primary: colors.accent5,
       background: colors.pageBackground,
       card: colors.header,
       text: colors.text,
@@ -42,11 +42,11 @@ const Screens = ({ colorMode, colors }) => {
           name="Conversations"
           component={ConversationsStack}
           options={({ navigation, route }) => ({
-            tabBarIcon: ({ focused, size }) => (
+            tabBarIcon: ({ color, size }) => (
               <Icon 
                 name="message-text" 
                 size={size} 
-                color={focused ? colors.accent1 : colors.captionText} 
+                color={color} 
               />
             )
           })}
@@ -56,11 +56,11 @@ const Screens = ({ colorMode, colors }) => {
           name="Privacy"
           component={Privacy}
           options={{
-            tabBarIcon: ({ focused, size }) => (
+            tabBarIcon: ({ color, size }) => (
               <Icon 
                 name="eye-off" 
                 size={size} 
-                color={focused ? colors.accent1 : colors.captionText} 
+                color={color} 
               />
             )
           }}
@@ -70,11 +70,11 @@ const Screens = ({ colorMode, colors }) => {
           name="My Account"
           component={Account}
           options={{
-            tabBarIcon: ({ focused, size }) => (
+            tabBarIcon: ({ color, size }) => (
               <Icon 
                 name="account-circle" 
                 size={size} 
-                color={focused ? colors.accent1 : colors.captionText} 
+                color={color} 
               />
             )
           }}
@@ -84,11 +84,11 @@ const Screens = ({ colorMode, colors }) => {
           name="Settings"
           component={Settings}
           options={{
-            tabBarIcon: ({ focused, size }) => (
+            tabBarIcon: ({ color, size }) => (
               <Icon 
                 name="cog" 
                 size={size} 
-                color={focused ? colors.accent1 : colors.captionText} 
+                color={color} 
               />
             )
           }}

@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   StyleSheet,
-  Switch,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import PageContainer from '../../components/common/PageContainer';
+import Switch from '../../components/common/rn/Swtch';
 import Text from '../../components/common/Text';
 
 const Settings = (props) => {

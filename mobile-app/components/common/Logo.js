@@ -23,7 +23,7 @@ export default Logo;
 
 const styles = StyleSheet.create({
   video: {
-    height: width*.6666667,
+    height: width*.833333,
     alignSelf: 'stretch'
   }
 })

@@ -2,11 +2,14 @@ import React from 'react';
 import Video from 'react-native-video';
 import {
   Dimensions,
+  Image,
   StyleSheet,
   View
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen'
 
 import splash from '../../assets/splashVideo.mp4';
+import splashImage from '../../assets/emptySplashFlower.png';
 
 const { height, width } = Dimensions.get('window');
 
@@ -17,13 +20,25 @@ const AppLoading = (props) => {
       props.onComplete();
   }
 
+  const hideSplash = () => {
+    SplashScreen.hide();
+  }
+
   return (
-    <Video
-      source={splash}
-      style={styles.video}
-      resizeMode="cover"
-      onProgress={handleProgress}
-    />
+    <>
+      <Image
+        source={splashImage}
+        style={styles.video}
+        resizeMode="cover"
+      />
+      <Video
+        source={splash}
+        style={styles.video}
+        resizeMode="cover"
+        onProgress={handleProgress}
+        onLoad={hideSplash}
+      />
+    </>
   )
 }
 
@@ -32,6 +47,7 @@ export default AppLoading;
 const styles = StyleSheet.create({
   video: {
     height,
-    width
+    width,
+    position: 'absolute'
   }
 })

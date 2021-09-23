@@ -23,8 +23,6 @@ const Conversation = (props) => {
 
   /* CONTROL BACK BUTTON IN HEADER */
   useEffect(() => {
-    console.log('hereakjsdbfiahjbdsf');
-
     //add an animation cause it's fun
     LayoutAnimation.configureNext(
       LayoutAnimation.create(

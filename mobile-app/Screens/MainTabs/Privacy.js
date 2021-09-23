@@ -20,7 +20,8 @@ const Privacy = (props) => {
         <Logo />
         <View style={styles.textContainer}>
           <Text style={styles.logoText}>
-            crypt<Text style={{ ...styles.logoText, color: props.colors.accent3 }}>iq</Text>
+            <Text style={{ ...styles.logoText, color: props.colors.accent5 }}>crypt</Text>
+            <Text style={{ ...styles.logoText, color: props.colors.accent3 }}>iq</Text>
           </Text>
         </View>
         <View style={{ ...styles.divider, backgroundColor: props.colors.border }} />

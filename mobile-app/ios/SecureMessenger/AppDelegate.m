@@ -3,6 +3,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "RNSplashScreen.h"  // react-native-splash-screen config
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -11,8 +12,6 @@
 #import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
-
-#import "RNSplashScreen.h"  // react-native-splash-screen config
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -50,7 +49,9 @@ static void InitializeFlipper(UIApplication *application) {
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-  [RNSplashScreen show]; //react-native-splash-screen config
+  //[RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView]; //react-native-splash-screen config
+  
+  [RNSplashScreen show];
 
   return YES;
 }

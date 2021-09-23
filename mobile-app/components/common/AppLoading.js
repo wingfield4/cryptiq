@@ -9,28 +9,23 @@ import {
 import SplashScreen from 'react-native-splash-screen'
 
 import splash from '../../assets/splashVideo.mp4';
-import splashImage from '../../assets/emptySplashFlower.png';
 
 const { height, width } = Dimensions.get('window');
 
-const DURATION = 1.6;
+const DURATION = 1.5;
 const AppLoading = (props) => {
-  handleProgress = ({ currentTime }) => {
+  const handleProgress = ({ currentTime }) => {
     if(currentTime >= DURATION)
       props.onComplete();
   }
 
   const hideSplash = () => {
+    console.log('here!');
     SplashScreen.hide();
   }
 
   return (
     <>
-      <Image
-        source={splashImage}
-        style={styles.video}
-        resizeMode="cover"
-      />
       <Video
         source={splash}
         style={styles.video}

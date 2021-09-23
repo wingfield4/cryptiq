@@ -26,7 +26,7 @@ const Privacy = (props) => {
         </View>
         <View style={{ ...styles.divider, backgroundColor: props.colors.border }} />
         <Text>
-          Cryptiq values your private or whatever blah blah blah. Here's how we do it
+          Cryptiq values your privacy or whatever blah blah blah. Here's how we do it
         </Text>
       </ScrollView>
     </PageContainer>

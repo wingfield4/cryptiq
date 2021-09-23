@@ -4,6 +4,7 @@
 
 # Xcode
 #
+mobile-app/ios/assets/
 build/
 *.pbxuser
 !default.pbxuser

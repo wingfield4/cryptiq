@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
 
-const DatabaseManager = ({ currentUser, dispatch, onComplete }) => {
+const UserManager = ({ currentUser, dispatch, onComplete }) => {
   useEffect(async () => {
     const userId = 'awfabpiubfaw';
 
@@ -20,4 +20,4 @@ const DatabaseManager = ({ currentUser, dispatch, onComplete }) => {
 
 export default connect(state => ({
   currentUser: state.currentUser
-}))(DatabaseManager);
+}))(UserManager);

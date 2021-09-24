@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-const TextInput = ({ colors, dispatch, style, ...props}) => {
+const TextInput = React.forwardRef(({ colors, dispatch, style, ...props }, ref) => {
   return (
     <RNTextInput
       style={{
@@ -13,15 +13,16 @@ const TextInput = ({ colors, dispatch, style, ...props}) => {
         color: colors.text,
         ...style
       }}
+      ref={ref}
       placeholderTextColor={colors.captionText}
       {...props}
     />
   )
-}
+})
 
 export default connect(state => ({
   colors: state.colors
-}))(TextInput);
+}), null, null, { forwardRef: true })(TextInput);
 
 const styles = StyleSheet.create({
   textInput: {

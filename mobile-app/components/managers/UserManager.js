@@ -6,11 +6,12 @@ const UserManager = ({ currentUser, dispatch, onComplete }) => {
   useEffect(async () => {
     const userId = 'awfabpiubfaw';
 
-    await AsyncStorage.setItem('userId', userId);
-    dispatch({
-      type: 'setCurrentUser',
-      user: { id: userId }
-    })
+    await AsyncStorage.removeItem('userId');
+    // await AsyncStorage.setItem('userId', userId);
+    // dispatch({
+    //   type: 'setCurrentUser',
+    //   user: { id: userId }
+    // })
   }, [])
 
   return (

@@ -2,13 +2,11 @@ import React from 'react';
 import Video from 'react-native-video';
 import {
   Dimensions,
-  Image,
-  StyleSheet,
-  View
+  StyleSheet
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen'
 
-import splash from '../../assets/splashVideo.mp4';
+import splash from '../../assets/splashVideoHighRes.mp4';
 
 const { height, width } = Dimensions.get('window');
 

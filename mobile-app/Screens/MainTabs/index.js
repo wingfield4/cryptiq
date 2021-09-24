@@ -1,33 +1,17 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { connect } from 'react-redux';
 
 import Account from './Account';
 import ConversationsStack from './ConversationsStack';
+import NavigationContainer from '../../components/common/NavigationContainer';
 import Privacy from './Privacy';
 import Settings from './Settings';
 
 import Icon from '../../components/common/Icon';
 
-const Screens = ({ colorMode, colors }) => {
-  const theme = {
-    ...DefaultTheme,
-    dark: colorMode === 'dark',
-    colors: {
-      primary: colors.accent5,
-      background: colors.pageBackground,
-      card: colors.header,
-      text: colors.text,
-      border: colors.border,
-      notification: colors.accent3
-    }
-  };
-
+const Screens = () => {
   return (
-    <NavigationContainer
-      theme={theme}
-    >
+    <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Conversations"
         backBehavior="none"
@@ -99,9 +83,6 @@ const Screens = ({ colorMode, colors }) => {
   )
 }
 
-export default connect(state => ({
-  colorMode: state.colorMode,
-  colors: state.colors
-}))(Screens);
+export default Screens;
 
 const Tab = createBottomTabNavigator();

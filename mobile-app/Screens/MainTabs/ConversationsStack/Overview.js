@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import ConversationList from '../../../components/messages/ConversationList';
+import NewConversationButton from '../../../components/messages/NewConversationButton';
+import NoConversations from '../../../components/messages/NoConversations';
 import PageContainer from '../../../components/common/PageContainer';
 
 import generateId from '../../../utilities/generateId';
@@ -66,9 +68,13 @@ const Overview = (props) => {
 
   return (
     <PageContainer>
-      {users &&
+      {users && users.length > 0 &&
         <ConversationList users={users} />
       }
+      {(!users || users.length ===0) &&
+        <NoConversations />
+      }
+      <NewConversationButton />
     </PageContainer>
   )
 }

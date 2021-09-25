@@ -4,15 +4,22 @@ import { connect } from 'react-redux';
 
 const UserManager = ({ currentUser, dispatch, onComplete }) => {
   useEffect(async () => {
-    const userId = 'awfabpiubfaw';
-
-    await AsyncStorage.removeItem('userId');
-    // await AsyncStorage.setItem('userId', userId);
-    // dispatch({
-    //   type: 'setCurrentUser',
-    //   user: { id: userId }
-    // })
+    await AsyncStorage.removeItem('userId'); //for debugging
+    const userId = await AsyncStorage.getItem('userId');
+    
+    if(userId) {
+      dispatch({
+        type: 'setCurrentUser',
+        user: { id: userId }
+      })
+    }
   }, [])
+
+  useEffect(async () => {
+    if(currentUser) {
+      await AsyncStorage.setItem('userId', currentUser.id);
+    }
+  }, [currentUser])
 
   return (
     <></>

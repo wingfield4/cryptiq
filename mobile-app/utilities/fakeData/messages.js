@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const thisUserId = `awfabpiubfaw`;
+const thisUserId = `12345678`;
 
 const messages = [
   /* FROM DAVID WINGFIELD */

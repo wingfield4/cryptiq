@@ -3,9 +3,12 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
+import { LayoutAnimation } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import BigButton from '../../components/common/BigButton';
 import KeyboardSpacer from '../../components/common/KeyboardSpacer';
@@ -17,8 +20,17 @@ import userIdIsValid from '../../utilities/userIdIsValid';
 
 const NewUser = (props) => {
   const [userId, setUserId] = useState('');
+  const navigation = useNavigation();
 
   const handleSubmit = () => {
+    LayoutAnimation.configureNext(
+      LayoutAnimation.create(
+        500,
+        LayoutAnimation.Types.easeInEaseOut,
+        LayoutAnimation.Properties.opacity
+      )
+    );
+
     props.dispatch({
       type: 'setCurrentUser',
       user: { id: userId }
@@ -32,6 +44,7 @@ const NewUser = (props) => {
           <Text style={styles.title}>
             Create Your Account
           </Text>
+
           <View style={styles.textFieldsContainer}>
             <TextField
               containerStyle={styles.textField}
@@ -39,14 +52,17 @@ const NewUser = (props) => {
               value={userId}
               onChangeText={setUserId}
             />
+            <TouchableOpacity style={styles.generateTextContainer}>
+              <Text style={styles.generateText}>Generate one for me</Text>
+            </TouchableOpacity>
 
-            <Text style={styles.infoText}>
+            {/* <Text style={styles.infoText}>
               The below fields are optional. 
               By default, this information will be 
               hidden from the public, but that can be 
               changed in the settings to help other find
               and message your account.
-            </Text>
+            </Text> */}
             <TextField
               containerStyle={styles.textField}
               placeholder="First Name (Optional)"
@@ -64,13 +80,19 @@ const NewUser = (props) => {
               placeholder="Email (Optional)"
             />
           </View>
+
           <BigButton
             disabled={!userIdIsValid(userId)}
             label="Get Started"
             style={{ marginTop: 16 }}
             onPress={handleSubmit}
           />
-          <Text style={{ marginTop: 16 }}>{`<  Go Back`}</Text>
+
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={{ marginTop: 16 }}>
+              {`<  Go Back`}
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
         <KeyboardSpacer />
       </SafeAreaView>
@@ -86,6 +108,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     flex: 1
+  },
+  generateText: {
+    textAlign: 'center'
+  },
+  generateTextContainer: {
+    marginBottom: 48
   },
   infoText: {
     textAlign: 'center',

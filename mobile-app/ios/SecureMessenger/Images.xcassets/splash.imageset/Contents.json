@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "splash.png",
+      "filename" : "singleFlowerSplash.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "splash-1.png",
+      "filename" : "singleFlowerSplash-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "splash-2.png",
+      "filename" : "singleFlowerSplash-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

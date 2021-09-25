@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Account from './Account';
+import Contacts from './Contacts';
 import ConversationsStack from './ConversationsStack';
 import NavigationContainer from '../../components/common/NavigationContainer';
 import Privacy from './Privacy';
@@ -37,12 +38,12 @@ const Screens = () => {
         />
 
         <Tab.Screen
-          name="Privacy"
-          component={Privacy}
+          name="Contacts"
+          component={Contacts}
           options={{
             tabBarIcon: ({ color, size }) => (
               <Icon 
-                name="eye-off" 
+                name="contacts" 
                 size={size} 
                 color={color} 
               />
@@ -57,6 +58,20 @@ const Screens = () => {
             tabBarIcon: ({ color, size }) => (
               <Icon 
                 name="account-circle" 
+                size={size} 
+                color={color} 
+              />
+            )
+          }}
+        />
+
+        <Tab.Screen
+          name="Privacy"
+          component={Privacy}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Icon 
+                name="eye-off" 
                 size={size} 
                 color={color} 
               />

@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 
-import hexFullDarkBlue from '../../assets/crypticBanner.mp4';
+import hexFullDarkBlue from '../../assets/crypticBannerNew.mp4';
 
 const { width } = Dimensions.get('window');
 
@@ -23,7 +23,7 @@ export default Logo;
 
 const styles = StyleSheet.create({
   video: {
-    height: width*.833333,
+    height: width*.740740740,
     alignSelf: 'stretch'
   }
 })

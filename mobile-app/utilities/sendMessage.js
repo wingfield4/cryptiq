@@ -10,7 +10,6 @@ import updateMessage from '../db/messages/updateMessage';
 const sendMessage = async ({ content, sender, receiver }) => {
   const baseMessage = {
     id: generateId(),
-    //sentAt: moment().format(),
     sentFrom: sender.id,
     sentTo: receiver.id
   };

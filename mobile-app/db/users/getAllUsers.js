@@ -14,6 +14,11 @@ const getAllUsers = async () => {
         WHERE m.sentFrom = u.id OR (m.sentFrom = ? AND m.sentTo = u.id)
       ) as messageCount,
 
+      ( SELECT count(1)
+        FROM message m
+        WHERE (m.sentFrom = u.id OR (m.sentFrom = ? AND m.sentTo = u.id)) AND m.readAt = null
+      ) as unreadMessageCount,
+
       ( SELECT m.sentAt
         FROM message m
         WHERE m.sentFrom = u.id OR (m.sentFrom = ? AND m.sentTo = u.id)

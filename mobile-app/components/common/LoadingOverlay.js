@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-  ActivityIndicator,
   StyleSheet,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
 
-const Loading = ({ colors, dispatch, style, ...props}) => {
+import Loading from './Loading';
+
+const LoadingOverlay = ({ colors, dispatch, style, ...props}) => {
   return (
     <View
       style={[
@@ -15,7 +16,7 @@ const Loading = ({ colors, dispatch, style, ...props}) => {
       ]}
       {...props}
     >
-      <ActivityIndicator
+      <Loading
         color="white"
         size="large"
       />
@@ -25,7 +26,7 @@ const Loading = ({ colors, dispatch, style, ...props}) => {
 
 export default connect(state => ({
   colors: state.colors
-}))(Loading);
+}))(LoadingOverlay);
 
 const styles = StyleSheet.create({
   container: {

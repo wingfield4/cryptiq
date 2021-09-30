@@ -64,11 +64,25 @@ const setUpdateMessageListeners = (state, action) => {
   }
 }
 
+const setReadMessageListeners = (state, action) => {
+  if(state === undefined) return {};
+
+  switch (action.type) {
+    case 'addReadMessageListener':
+      return { ...state, [action.id]: action.onAddMessage };
+    case 'removeReadMessageListener':
+      return { ...state, [action.id]: undefined };
+    default:
+      return state;
+  }
+}
+
 /* EXPORT */
 export default createStore(combineReducers({
   colors: setColors,
   colorMode: setColorMode,
   currentUser: setCurrentUser,
   newMessageListeners: setNewMessageListeners,
-  updateMessageListeners: setUpdateMessageListeners
+  updateMessageListeners: setUpdateMessageListeners,
+  readMessageListeners: setReadMessageListeners
 }));

@@ -18,11 +18,13 @@ const Text = (props) => {
   
   return (
     <RNText
-      style={{
-        color: caption ? colors.captionText : error ? colors.error : colors.text,
-        fontSize: allowScaling ? 14*fontMultiplier : 14,
-        ...style
-      }}
+      style={[
+        {
+          color: caption ? colors.captionText : error ? colors.error : colors.text,
+          fontSize: allowScaling ? 14*fontMultiplier : 14
+        },
+        style
+      ]}
       {...rest}
     >
       {children}

@@ -13,6 +13,7 @@ import Text from '../../../components/common/Text';
 import generateId from '../../../utilities/generateId';
 import getMessagesFromUser from '../../../db/messages/getMessagesFromUser';
 import formatName from '../../../utilities/formatName';
+import readMessagesFromUser from '../../../db/messages/readMessagesFromUser';
 import sendMessage from '../../../utilities/sendMessage';
 
 const Conversation = (props) => {
@@ -54,7 +55,7 @@ const Conversation = (props) => {
   /* NEW MESSAGE EVENT */
   useEffect(() => {
     const handleAddMessage = (message) => {
-      if(!messages)
+      if(!messages || (message.sentFrom !== user.id && message.sentTo !== user.id))
         return;
 
       /* apply animation for adding message to our list */
@@ -65,6 +66,8 @@ const Conversation = (props) => {
           LayoutAnimation.Properties.opacity
         )
       );
+
+      readMessagesFromUser(user.id);
   
       /* update our state */
       setMessages([message, ...messages]);
@@ -129,6 +132,7 @@ const Conversation = (props) => {
   /* LOAD OUR MESSAGES */
   useEffect(async () => {
     if(user) {
+      readMessagesFromUser(user.id);
       let messages = await getMessagesFromUser(user.id);
       setLoading(false);
       setMessages(messages);

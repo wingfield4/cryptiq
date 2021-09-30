@@ -5,7 +5,7 @@ const addMessage = async (message) => {
   await db.executeSql(`
     INSERT INTO message (
       id, 
-      encryptedContent, 
+      content, 
       sentAt, 
       sentFrom,
       sentTo,
@@ -15,7 +15,7 @@ const addMessage = async (message) => {
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `, [
     message.id,
-    message.encryptedContent,
+    message.content,
     message.sentAt,
     message.sentFrom,
     message.sentTo,
@@ -23,10 +23,10 @@ const addMessage = async (message) => {
     message.readAt
   ]);
 
-  const { messageListeners } = store.getState();
-  Object.keys(messageListeners).forEach(key => {
-    if(messageListeners[key])
-      messageListeners[key](message);
+  const { newMessageListeners } = store.getState();
+  Object.keys(newMessageListeners).forEach(key => {
+    if(newMessageListeners[key])
+      newMessageListeners[key](message);
   })
 }
 

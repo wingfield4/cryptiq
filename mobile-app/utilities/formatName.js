@@ -3,7 +3,7 @@ const formatName = (user) => {
     return `${user.firstName} ${user.lastName}`;
   }
 
-  return `${user.id}`;
+  return `${user.username}`;
 }
 
 export default formatName;

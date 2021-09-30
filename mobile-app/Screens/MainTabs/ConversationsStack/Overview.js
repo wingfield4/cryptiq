@@ -41,7 +41,7 @@ const Overview = (props) => {
 
     if(activeListenerId) {
       props.dispatch({
-        type: 'addMessageListener',
+        type: 'addNewMessageListener',
         id: activeListenerId,
         onAddMessage: handleAddMessage
       });
@@ -53,7 +53,7 @@ const Overview = (props) => {
     return () => {
       if(activeListenerId) {
         props.dispatch({
-          type: 'removeMessageListener',
+          type: 'removeNewMessageListener',
           id: activeListenerId
         });
       }
@@ -68,11 +68,8 @@ const Overview = (props) => {
 
   return (
     <PageContainer>
-      {users && users.length > 0 &&
+      {users &&
         <ConversationList users={users} />
-      }
-      {(!users || users.length ===0) &&
-        <NoConversations />
       }
       <NewConversationButton />
     </PageContainer>

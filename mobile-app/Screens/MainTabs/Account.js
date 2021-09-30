@@ -2,25 +2,23 @@ import React from 'react';
 import {
   StyleSheet
 } from 'react-native';
-import { connect } from 'react-redux';
 
+import AccountHeader from '../../components/account/AccountHeader';
+import AccountInformation from '../../components/account/AccountInformation';
 import PageContainer from '../../components/common/PageContainer';
-import Text from '../../components/common/Text';
+import ProfilePicture from '../../components/account/ProfilePicture';
 
-const Account = (props) => {
+const Account = () => {
   return (
     <PageContainer style={styles.container}>
-      <Text>
-        Here's information about your account
-      </Text>
+      <AccountHeader />
+      <AccountInformation />
+      <ProfilePicture />
     </PageContainer>
   )
 }
 
-export default connect(state => ({
-  colorMode: state.colorMode,
-  colors: state.colors
-}))(Account);
+export default Account;
 
 const styles = StyleSheet.create({
   container: {

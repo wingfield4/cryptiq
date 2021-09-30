@@ -8,8 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "build:ios": "react-native bundle --entry-file='index.js' --assets-dest ./ios --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'",
-    "postinstall": "npm run bundle:ios"
+    "build:ios": "react-native bundle --entry-file='index.js' --assets-dest ./ios --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.8",
@@ -24,6 +23,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-get-random-values": "^1.7.0",
     "react-native-reanimated": "^2.2.2",
+    "react-native-rsa-native": "^2.0.4",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.7.2",
     "react-native-splash-screen": "^3.2.0",

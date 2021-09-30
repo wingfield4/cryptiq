@@ -29,7 +29,7 @@ const NewConversationButton = ({ colors }) => {
             <Icon name="close" size={32} />
           </TouchableOpacity>
         </View>
-        <StartNewConversation />
+        <StartNewConversation onClose={() => setVisible(false)} />
       </Modal>
     </>
   )

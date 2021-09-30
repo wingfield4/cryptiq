@@ -3,7 +3,8 @@ import db from '../../db';
 const addUser = async (user) => {
   await db.executeSql(`
     INSERT INTO user (
-      id, 
+      id,
+      username,
       publicKey, 
       firstName, 
       middleName, 
@@ -11,9 +12,10 @@ const addUser = async (user) => {
       email, 
       phone
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `, [
     user.id,
+    user.username,
     user.publicKey,
     user.firstName,
     user.middleName,

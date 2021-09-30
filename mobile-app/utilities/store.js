@@ -3,6 +3,7 @@ import colors from './colors';
 
 const DEFAULT_COLOR_MODE = 'dark';
 
+/* STATE */
 const setColors = (state, action) => {
   if(!state) return colors[DEFAULT_COLOR_MODE];
 
@@ -36,22 +37,38 @@ const setCurrentUser = (state, action) => {
   }
 }
 
-const setMessageListeners = (state, action) => {
+/* EVENTS */
+const setNewMessageListeners = (state, action) => {
   if(state === undefined) return {};
 
   switch (action.type) {
-    case 'addMessageListener':
+    case 'addNewMessageListener':
       return { ...state, [action.id]: action.onAddMessage };
-    case 'removeMessageListener':
+    case 'removeNewMessageListener':
       return { ...state, [action.id]: undefined };
     default:
       return state;
   }
 }
 
+const setUpdateMessageListeners = (state, action) => {
+  if(state === undefined) return {};
+
+  switch (action.type) {
+    case 'addUpdateMessageListener':
+      return { ...state, [action.id]: action.onAddMessage };
+    case 'removeUpdateMessageListener':
+      return { ...state, [action.id]: undefined };
+    default:
+      return state;
+  }
+}
+
+/* EXPORT */
 export default createStore(combineReducers({
   colors: setColors,
   colorMode: setColorMode,
   currentUser: setCurrentUser,
-  messageListeners: setMessageListeners
+  newMessageListeners: setNewMessageListeners,
+  updateMessageListeners: setUpdateMessageListeners
 }));

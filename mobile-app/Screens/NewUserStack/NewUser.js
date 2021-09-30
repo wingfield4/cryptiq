@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -12,17 +12,39 @@ import { useNavigation } from '@react-navigation/native';
 
 import BigButton from '../../components/common/BigButton';
 import KeyboardSpacer from '../../components/common/KeyboardSpacer';
+import LoadingOverlay from '../../components/common/LoadingOverlay';
 import PageContainer from '../../components/common/PageContainer';
 import Text from '../../components/common/Text';
 import TextField from '../../components/common/TextField';
 
-import userIdIsValid from '../../utilities/userIdIsValid';
+import api from '../../utilities/api';
+import generateKeys from '../../utilities/crypto/generateKeys';
+import usernameIsValid from '../../utilities/usernameIsValid';
 
 const NewUser = (props) => {
-  const [userId, setUserId] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setLoading(true);
+    const publicKey = await generateKeys({ username });
+
+    const user = await api.createUser({
+      username,
+      publicKey,
+      firstName,
+      middleName,
+      lastName,
+      email,
+      phone
+    });
+    
     LayoutAnimation.configureNext(
       LayoutAnimation.create(
         500,
@@ -33,7 +55,7 @@ const NewUser = (props) => {
 
     props.dispatch({
       type: 'setCurrentUser',
-      user: { id: userId }
+      user
     })
   }
 
@@ -48,9 +70,10 @@ const NewUser = (props) => {
           <View style={styles.textFieldsContainer}>
             <TextField
               containerStyle={styles.textField}
-              placeholder="User ID"
-              value={userId}
-              onChangeText={setUserId}
+              placeholder="Username"
+              value={username}
+              onChangeText={setUsername}
+              autoCorrect={false}
             />
             <TouchableOpacity style={styles.generateTextContainer}>
               <Text style={styles.generateText}>Generate one for me</Text>
@@ -66,24 +89,43 @@ const NewUser = (props) => {
             <TextField
               containerStyle={styles.textField}
               placeholder="First Name (Optional)"
+              value={firstName}
+              onChangeText={setFirstName}
+              autoCorrect={false}
+            />
+            <TextField
+              containerStyle={styles.textField}
+              placeholder="Middle Name (Optional)"
+              value={middleName}
+              onChangeText={setMiddleName}
+              autoCorrect={false}
             />
             <TextField
               containerStyle={styles.textField}
               placeholder="Last Name (Optional)"
+              value={lastName}
+              onChangeText={setLastName}
+              autoCorrect={false}
             />
             <TextField
               containerStyle={styles.textField}
               placeholder="Phone (Optional)"
+              value={phone}
+              onChangeText={setPhone}
+              keyboardType="number-pad"
             />
             <TextField
               containerStyle={styles.textField}
               placeholder="Email (Optional)"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
             />
           </View>
 
           <BigButton
-            disabled={!userIdIsValid(userId)}
-            label="Get Started"
+            disabled={!usernameIsValid(username) || loading}
+            label={loading ? "Creating Your Acount..." : "Get Started"}
             style={{ marginTop: 16 }}
             onPress={handleSubmit}
           />
@@ -96,6 +138,9 @@ const NewUser = (props) => {
         </ScrollView>
         <KeyboardSpacer />
       </SafeAreaView>
+      {loading &&
+        <LoadingOverlay />
+      }
     </PageContainer>
   )
 }

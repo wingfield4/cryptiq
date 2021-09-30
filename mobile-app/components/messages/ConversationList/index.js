@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import ConversationCard from '../ConversationCard';
 import Divider from '../../common/Divider';
+import NoConversations from '../NoConversations';
 import SectionHeader from './SectionHeader';
 
 const ConversationList = (props) => {
@@ -18,7 +19,7 @@ const ConversationList = (props) => {
     { title: 'More Than A Year Ago', data: [] },
   ];
 
-  props.users.forEach(user => {
+  props.users.filter(user => user.messageCount > 0).forEach(user => {
     let mostRecentInteraction = moment(user.mostRecentInteraction);
     
     if(mostRecentInteraction.isAfter(moment().subtract(1, 'day'))) {
@@ -43,6 +44,7 @@ const ConversationList = (props) => {
         <SectionHeader title={title} />
       )}
       ItemSeparatorComponent={Divider}
+      ListEmptyComponent={NoConversations}
     />
   )
 }

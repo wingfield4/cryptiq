@@ -18,7 +18,6 @@ const AppLoading = (props) => {
   }
 
   const hideSplash = () => {
-    console.log('here!');
     SplashScreen.hide();
   }
 

@@ -16,7 +16,7 @@ const ConversationCard = (props) => {
   const { onPress, ...linkProps } = useLinkProps({
     to: {
       screen: 'Conversation',
-      params: { userId: props.user.id }
+      params: { user: props.user }
     }
   });
 

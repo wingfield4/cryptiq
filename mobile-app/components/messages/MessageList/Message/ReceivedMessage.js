@@ -37,7 +37,7 @@ const ReceivedMessage = (props) => {
               color: props.colors.accent3Text
             }}
           >
-            {props.message.encryptedContent}
+            {props.message.content}
           </Text>
         </TouchableOpacity>
         <View style={styles.spacer} />

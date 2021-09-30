@@ -9,9 +9,15 @@ import { connect } from 'react-redux';
 import FAB from '../../common/FAB';
 import Icon from '../../common/Icon';
 import Modal from '../../common/rn/Modal';
+import NewContact from '../NewContact';
 
-const NewConversationButton = ({ colors }) => {
+const NewConversationButton = ({ colors, onAddContact }) => {
   const [visible, setVisible] = useState(false);
+
+  const handleAddContact = (user) => {
+    onAddContact(user);
+    setVisible(false);
+  }
 
   return (
     <>
@@ -28,6 +34,7 @@ const NewConversationButton = ({ colors }) => {
             <Icon name="close" size={32} />
           </TouchableOpacity>
         </View>
+        <NewContact onAddContact={handleAddContact} />
       </Modal>
     </>
   )

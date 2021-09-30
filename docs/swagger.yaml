@@ -288,7 +288,7 @@ definitions:
       id:
         type: "string"
         format: "uuid"
-      encryptedContent:
+      content:
         type: "string"
       sentAt:
         type: "string"

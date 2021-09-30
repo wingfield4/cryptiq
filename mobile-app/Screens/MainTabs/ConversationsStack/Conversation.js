@@ -10,19 +10,25 @@ import MessageList from '../../../components/messages/MessageList';
 import PageContainer from '../../../components/common/PageContainer';
 import Text from '../../../components/common/Text';
 
-import addMessage from '../../../db/messages/addMessage';
 import generateId from '../../../utilities/generateId';
 import getMessagesFromUser from '../../../db/messages/getMessagesFromUser';
+import formatName from '../../../utilities/formatName';
+import sendMessage from '../../../utilities/sendMessage';
 
 const Conversation = (props) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState(null);
-  const [activeListenerId] = useState(generateId());
+  const [newMessageListenerId] = useState(generateId());
+  const [updateMessageListenerId] = useState(generateId());
   const navigation = useNavigation();
+  const user = props.route.params.user;
 
   /* CONTROL BACK BUTTON IN HEADER */
   useEffect(() => {
+    if(user)
+      navigation.getParent().setOptions({ headerTitle: formatName(user) });
+
     //add an animation cause it's fun
     LayoutAnimation.configureNext(
       LayoutAnimation.create(
@@ -32,20 +38,20 @@ const Conversation = (props) => {
       )
     );
 
-    //set up back button
-    navigation.getParent().setOptions(({
+    navigation.getParent().setOptions({
       headerLeft: () => <BackButton />
-    }));
+    });
 
     //remove back button on unmount
     return () => {
       navigation.getParent().setOptions(({
-        headerLeft: null
+        headerLeft: null,
+        headerTitle: undefined
       }));
     }
   }, []);
 
-  /* ADD AND UPDATE OUR EVENT AS NECCESSARY */
+  /* NEW MESSAGE EVENT */
   useEffect(() => {
     const handleAddMessage = (message) => {
       if(!messages)
@@ -64,32 +70,66 @@ const Conversation = (props) => {
       setMessages([message, ...messages]);
     }
 
-    if(activeListenerId) {
+    if(newMessageListenerId) {
       props.dispatch({
-        type: 'addMessageListener',
-        id: activeListenerId,
+        type: 'addNewMessageListener',
+        id: newMessageListenerId,
         onAddMessage: handleAddMessage
       });
     }
-  }, [activeListenerId, props.dispatch, setMessages, messages])
+  }, [newMessageListenerId, props.dispatch, setMessages, messages])
+
+  /* UPDATE MESSAGE EVENT */
+  useEffect(() => {
+    const handleUpdateMessage = (updatedMessage) => {
+      if(!messages)
+        return;
+  
+      /* update our state */
+      setMessages(messages.map(message => {
+        if(message.id === updatedMessage.id) {
+          return {
+            ...message,
+            ...updatedMessage
+          }
+        }
+
+        return message;
+      }));
+    }
+
+    if(updateMessageListenerId) {
+      props.dispatch({
+        type: 'addUpdateMessageListener',
+        id: updateMessageListenerId,
+        onAddMessage: handleUpdateMessage
+      });
+    }
+  }, [updateMessageListenerId, props.dispatch, setMessages, messages])
 
   /* KILL THE EVENT WHEN WE UNMOUNT */
   useEffect(() => {
     return () => {
-      if(activeListenerId) {
+      if(newMessageListenerId) {
         props.dispatch({
-          type: 'removeMessageListener',
-          id: activeListenerId
+          type: 'removeNewMessageListener',
+          id: newMessageListenerId
+        });
+      }
+      
+      if(updateMessageListenerId) {
+        props.dispatch({
+          type: 'removeUpdateMessageListener',
+          id: updateMessageListenerId
         });
       }
     }
-  }, [activeListenerId])
+  }, [newMessageListenerId, updateMessageListenerId])
 
   /* LOAD OUR MESSAGES */
   useEffect(async () => {
-    const userId = props.route.params.userId;
-    if(userId) {
-      let messages = await getMessagesFromUser(userId);
+    if(user) {
+      let messages = await getMessagesFromUser(user.id);
       setLoading(false);
       setMessages(messages);
     } else {
@@ -98,24 +138,12 @@ const Conversation = (props) => {
     }
   }, []);
 
-  const handleSend = (content) => {
-    /* TODO handle ecryption and api call */
-
-    /* build our message */
-    const message = {
-      id: generateId(), //TODO random id
-      encryptedContent: content, //TODO encryption
-      sentAt: moment().format(),
-      sentFrom: props.currentUser.id,
-      sentTo: props.route.params.userId
-    }
-
-    /* update our db */
-    addMessage(message).then(res => {
-      //do something?
-    }).catch(err => {
-      console.log(err);
-      //retry?
+  const handleSend = async (content) => {
+    //TODO handle errors
+    await sendMessage({
+      content,
+      sender: props.currentUser,
+      receiver: user
     });
   }
 

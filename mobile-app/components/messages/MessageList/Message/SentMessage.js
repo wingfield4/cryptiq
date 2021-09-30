@@ -25,6 +25,8 @@ const SentMessage = (props) => {
     
     if(message.sentAt)
         return `Sent ${formatMessageDate(props.message.sentAt)}`;
+
+    return 'Sending...';
   }
 
   return (
@@ -51,7 +53,7 @@ const SentMessage = (props) => {
               color: props.colors.accent3Text
             }}
           >
-            {props.message.encryptedContent}
+            {props.message.content}
           </Text>
         </TouchableOpacity>
       </View>

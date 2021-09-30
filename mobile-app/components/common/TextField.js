@@ -19,7 +19,6 @@ const TextField = ({ colors, containerStyle, dispatch, ...props }) => {
         ...containerStyle
       }}
       onPress={() => {
-        console.log('ere');
         if(textInput)
           textInput.current.focus();
       }}

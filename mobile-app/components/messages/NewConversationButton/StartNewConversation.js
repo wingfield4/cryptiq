@@ -1,31 +1,56 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-import Text from '../../common/Text';
+import TextField from '../../common/TextField';
+import UserList from '../../users/UserList';
 
-const StartNewConversation = () => {
+import api from '../../../utilities/api';
+import getAllUsers from '../../../db/users/getAllUsers';
+
+const StartNewConversation = (props) => {
+  const [username, setUsername] = useState('');
+  const [users, setUsers] = useState(null);
+  const navigation = useNavigation();
+
+  useEffect(async () => {
+    const foundUsers = await getAllUsers();
+    setUsers(foundUsers);
+  }, [])
+
+  const handlePressUser = (user) => {
+    if(props.onClose)
+      props.onClose();
+
+    navigation.navigate('Conversation', { user });
+  }
+
+  const handleSearch = async () => {
+    const foundUsers = await api.searchForUser({
+      username
+    });
+
+    setUsers(foundUsers);
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Hey! This page doesn't exist yet. Sorry!
-      </Text>
-    </View>
+    <>
+      <TextField
+        value={username}
+        onChangeText={setUsername}
+        placeholder="Search by username..."
+        blurOnSubmit
+        returnKeyType="search"
+        onSubmitEditing={handleSearch}
+        autoCorrect={false}
+      />
+      {users &&
+        <UserList
+          users={users}
+          onPressUser={handlePressUser}
+        />
+      }
+    </>
   )
 }
 
 export default StartNewConversation;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    paddingTop: 32
-  },
-  title: {
-    fontSize: 24,
-    textAlign: 'center'
-  }
-})

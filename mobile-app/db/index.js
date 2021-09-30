@@ -26,6 +26,7 @@ class Database {
     await this.executeSql(`
       CREATE TABLE IF NOT EXISTS user (
         id TEXT PRIMARY KEY,
+        username TEXT,
         publicKey TEXT,
         firstName TEXT,
         middleName TEXT,
@@ -38,7 +39,7 @@ class Database {
     await this.executeSql(`
       CREATE TABLE IF NOT EXISTS message (
         id TEXT PRIMARY KEY,
-        encryptedContent TEXT,
+        content TEXT,
         sentAt TEXT,
         sentFrom TEXT,
         sentTo TEXT,
@@ -46,11 +47,20 @@ class Database {
         readAt TEXT
       )
     `);
+
+    await this.executeSql(`
+      CREATE TABLE IF NOT EXISTS contact (
+        id INTEGER PRIMARY KEY,
+        userId TEXT,
+        createdAt TEXT
+      )
+    `);
   }
 
   down = async () => {
     await this.executeSql('DROP TABLE IF EXISTS user');
     await this.executeSql('DROP TABLE IF EXISTS message');
+    await this.executeSql('DROP TABLE IF EXISTS contact');
   }
 }
 

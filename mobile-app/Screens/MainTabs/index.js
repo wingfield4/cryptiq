@@ -5,6 +5,7 @@ import Account from './Account';
 import Contacts from './Contacts';
 import ConversationsStack from './ConversationsStack';
 import NavigationContainer from '../../components/common/NavigationContainer';
+import NotificationManager from '../../components/managers/NotificationManager';
 import Privacy from './Privacy';
 import Settings from './Settings';
 
@@ -14,7 +15,9 @@ import Icon from '../../components/common/Icon';
 const Screens = () => {
   return (
     <>
+      {/* managers for logged-in users */}
       <ConnectionManager />
+      <NotificationManager />
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName="Conversations"

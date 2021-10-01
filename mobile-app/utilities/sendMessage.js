@@ -24,10 +24,11 @@ const sendMessage = async ({ content, sender, receiver }) => {
   await addMessage(localMessage);
 
   //create a message to send, encrypted for receiver
+  const encryptedContent = await encryptMessage(content, receiver.publicKey);
   const outgoingMessage = {
     ...baseMessage,
-    encryptedContent: await encryptMessage(content, receiver.publicKey),
-    signature: await getSignature(content),
+    encryptedContent,
+    signature: await getSignature(encryptedContent),
   }
 
   //send the outgoing message to the server

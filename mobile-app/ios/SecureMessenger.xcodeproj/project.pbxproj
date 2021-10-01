@@ -65,6 +65,7 @@
 		61D7E90BBB254D7DAC6B5F27 /* SourceSansPro-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-ExtraLightItalic.ttf"; path = "../assets/fonts/SourceSansPro-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		630A347126FCD726009F411A /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		630A347326FCDAE5009F411A /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		6329D8F52706921E0082F238 /* SecureMessenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SecureMessenger.entitlements; path = SecureMessenger/SecureMessenger.entitlements; sourceTree = "<group>"; };
 		647CA57BA7E13DFF0534EADD /* libPods-SecureMessenger-SecureMessengerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SecureMessenger-SecureMessengerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69C710BC3F3E4275A1EF6E41 /* SourceSansPro-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-BlackItalic.ttf"; path = "../assets/fonts/SourceSansPro-BlackItalic.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SecureMessenger/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		13B07FAE1A68108700A75B9A /* SecureMessenger */ = {
 			isa = PBXGroup;
 			children = (
+				6329D8F52706921E0082F238 /* SecureMessenger.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -587,6 +589,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SecureMessenger/SecureMessenger.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T3L625VRQ3;
 				ENABLE_BITCODE = NO;
@@ -619,6 +622,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SecureMessenger/SecureMessenger.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T3L625VRQ3;
 				INFOPLIST_FILE = SecureMessenger/Info.plist;

@@ -23,6 +23,7 @@ import usernameIsValid from '../../utilities/usernameIsValid';
 
 const NewUser = (props) => {
   const [loading, setLoading] = useState(false);
+  const [loadingUsername, setLoadingUsername] = useState(false);
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
@@ -59,6 +60,16 @@ const NewUser = (props) => {
     })
   }
 
+  const handleGenerateUsername = async () => {
+    setLoadingUsername(true);
+    setUsername('');
+
+    let newUsername = await api.generateUsername();
+
+    setLoadingUsername(false);
+    setUsername(newUsername);
+  }
+
   return (
     <PageContainer>
       <SafeAreaView style={{ flex: 1 }}>
@@ -70,12 +81,15 @@ const NewUser = (props) => {
           <View style={styles.textFieldsContainer}>
             <TextField
               containerStyle={styles.textField}
-              placeholder="Username"
+              placeholder={loadingUsername ? "Generating Username..." : 'Username'}
               value={username}
               onChangeText={setUsername}
               autoCorrect={false}
             />
-            <TouchableOpacity style={styles.generateTextContainer}>
+            <TouchableOpacity
+              style={styles.generateTextContainer}
+              onPress={handleGenerateUsername}
+            >
               <Text style={styles.generateText}>Generate one for me</Text>
             </TouchableOpacity>
 

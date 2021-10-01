@@ -1,5 +1,6 @@
 import getAllUsers from "../db/users/getAllUsers";
 import generateId from "./generateId";
+import generateUsername from "./generateUsername";
 
 const FAKE_TIMEOUT = 1000;
 
@@ -31,6 +32,24 @@ const api = {
 
   /* SEND MESSAGE */
   sendMessage: () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, FAKE_TIMEOUT);
+    })
+  },
+
+  /* GET RANDOM USERNAME */
+  generateUsername: () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(generateUsername());
+      }, FAKE_TIMEOUT);
+    })
+  },
+
+  /* REGISTER IOS DEVICE FOR PUSH NOTIFICATIONS */
+  registerIOSDevice: ({ token, userId }) => {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve();

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import AppLoading from './components/common/AppLoading';
 import ColorManager from './components/managers/ColorManager';
 import DatabaseManager from './components/managers/DatabaseManager';
+import NotificationManager from './components/managers/NotificationManager';
 import StatusBarManager from './components/managers/StatusBarManager';
 import UserManager from './components/managers/UserManager';
 
@@ -31,6 +32,7 @@ const App = () => {
     <Provider store={store}>
       <ColorManager />
       <DatabaseManager onComplete={() => setLoading(false)} />
+      <NotificationManager />
       <UserManager />
       {!loading && !playing && 
         <Screens />

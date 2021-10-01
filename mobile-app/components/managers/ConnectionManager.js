@@ -44,7 +44,7 @@ const ConnectionManager = ({ currentUser }) => {
     }
 
     //TODO open socket connection
-    const FAKE_EVENT_INTERVAL = 3000;
+    const FAKE_EVENT_INTERVAL = 15000;
     const fakeEvent = async () => {
       let allUsers = await getAllUsers();
 

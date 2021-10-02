@@ -58,3 +58,5 @@ buck-out/
 
 # CocoaPods
 /mobile-app/ios/Pods/
+mobile-app/ios/AuthKey_FFHH797KM7.p8
+mobile-app/ios/GoogleService-Info.plist

@@ -6,6 +6,7 @@
 #import "RNSplashScreen.h"  // react-native-splash-screen config
 #import <UserNotifications/UserNotifications.h>
 #import <RNCPushNotificationIOS.h>
+#import <Firebase.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -55,6 +56,8 @@ static void InitializeFlipper(UIApplication *application) {
 
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
+  
+  [FIRApp configure];
   
   [RNSplashScreen show];
 

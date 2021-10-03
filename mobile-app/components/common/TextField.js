@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import {
   StyleSheet,
+  Platform,
   Pressable,
   View
 } from 'react-native';
@@ -13,11 +14,11 @@ const TextField = ({ colors, containerStyle, dispatch, ...props }) => {
 
   return (
     <Pressable
-      style={{
-        ...styles.container,
-        borderColor: colors.border,
-        ...containerStyle
-      }}
+      style={[
+        styles.container,
+        { borderColor: colors.border },
+        containerStyle
+      ]}
       onPress={() => {
         if(textInput)
           textInput.current.focus();
@@ -39,6 +40,6 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
     borderRadius: 4,
-    padding: 8,
+    padding: 8
   }
 })

@@ -60,3 +60,5 @@ buck-out/
 /mobile-app/ios/Pods/
 mobile-app/ios/AuthKey_FFHH797KM7.p8
 mobile-app/ios/GoogleService-Info.plist
+mobile-app/android/app/google-services.json
+mobile-app/android/java_pid65196.hprof

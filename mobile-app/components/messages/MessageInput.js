@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Platform,
   StyleSheet,
   View
 } from 'react-native';
@@ -53,12 +54,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 12,
     flexDirection: 'row',
-    alignItems: 'flex-end'
+    alignItems: 'center'
   },
   outerContainer: {
     padding: 8
   },
   textInput: {
     flex: 1,
+    marginBottom: Platform.OS === 'ios' ? 4 : 0
   }
 })

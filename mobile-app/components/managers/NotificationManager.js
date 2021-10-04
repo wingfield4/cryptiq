@@ -22,9 +22,7 @@ const NotificationManager = ({ currentUser }) => {
   useEffect(async () => {
     const authStatus = await messaging().requestPermission();
 
-    const enabled =
-    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+    const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
     if (enabled) {
       console.log('Authorization status:', authStatus);
@@ -49,8 +47,26 @@ const NotificationManager = ({ currentUser }) => {
   }, [])
 
   useEffect(() => {
+    /* HANDLE BACKGROUND STATE NOTIFICATION */
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      console.log('Notification caused app to open from background state:', remoteMessage.notification);
+      //TODO redirect to message chain or overview
+    });
+
+    /* HANDLE CLOSED STATE NOTIFICATION */
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        if (remoteMessage) {
+          console.log('Notification caused app to open from quit state:', remoteMessage.notification);
+          //TODO redirect to message chain or overview
+        }
+      });
+
+    /* HANDLE ACTIVE STATE NOTIFICATION */
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      console.log('New message: ', remoteMessage);
+      //handle message
     });
 
     return unsubscribe;

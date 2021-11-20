@@ -6,10 +6,10 @@ import addUser from '../../db/users/addUser';
 
 const seedFakeData = async () => {
   //seed users
-  let users = await getUsers();
-  for(let i = 0; i < users.length; i++) {
-    await addUser(users[i]);
-  }
+  // let users = await getUsers();
+  // for(let i = 0; i < users.length; i++) {
+  //   await addUser(users[i]);
+  // }
 
   // //seed messages
   // for(let i = 0; i < messages.length; i++) {

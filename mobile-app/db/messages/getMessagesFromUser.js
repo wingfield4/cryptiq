@@ -5,6 +5,9 @@ import db from '../../db';
 const getMessagesFromUser = async (userId) => {
   const thisUserId = await AsyncStorage.getItem('userId');
 
+  console.log('userId', userId);
+  console.log('thisUserId', thisUserId);
+
   //TODO HANDLE DYNAMIC LIMIT AND PAGINATION
   let messages = await db.executeSql(`
     SELECT 

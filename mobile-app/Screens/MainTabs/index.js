@@ -12,11 +12,11 @@ import Settings from './Settings';
 import ConnectionManager from '../../components/managers/ConnectionManager';
 import Icon from '../../components/common/Icon';
 
-const Screens = () => {
+const MainTabs = () => {
   return (
     <>
       {/* managers for logged-in users */}
-      <ConnectionManager />
+      {/* <ConnectionManager /> */}
       <NotificationManager />
       <NavigationContainer>
         <Tab.Navigator
@@ -105,6 +105,6 @@ const Screens = () => {
   )
 }
 
-export default Screens;
+export default MainTabs;
 
 const Tab = createBottomTabNavigator();

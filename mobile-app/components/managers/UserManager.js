@@ -13,13 +13,13 @@ const UserManager = ({ currentUser, dispatch, onComplete }) => {
         user: { id: userId }
       })
     }
-  }, [])
+  }, []);
 
   useEffect(async () => {
     if(currentUser) {
-      await AsyncStorage.setItem('userId', currentUser.id);
+      await AsyncStorage.setItem('userId', currentUser.id.toString());
     }
-  }, [currentUser])
+  }, [currentUser]);
 
   return (
     <></>

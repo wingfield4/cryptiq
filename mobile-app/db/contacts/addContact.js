@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import db from '../../db';
 
-const addUser = async (userId) => {
+const addContact = async (userId) => {
   await db.executeSql(`
     INSERT INTO contact (
       userId,
@@ -15,4 +15,4 @@ const addUser = async (userId) => {
   ]);
 }
 
-export default addUser;
+export default addContact;

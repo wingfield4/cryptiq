@@ -18,6 +18,7 @@ import Text from '../../components/common/Text';
 import TextField from '../../components/common/TextField';
 
 import api from '../../utilities/api';
+import addUser from '../../db/users/addUser';
 import generateKeys from '../../utilities/crypto/generateKeys';
 import usernameIsValid from '../../utilities/usernameIsValid';
 
@@ -37,27 +38,33 @@ const NewUser = (props) => {
     const publicKey = await generateKeys({ username });
 
     const user = await api.createUser({
-      username,
-      publicKey,
-      firstName,
-      middleName,
-      lastName,
-      email,
-      phone
-    });
+        username,
+        publicKey,
+        firstName,
+        middleName,
+        lastName,
+        email,
+        phone
+      })
+      .then(res => res.data)
+      .catch(err => console.log(err));
     
-    LayoutAnimation.configureNext(
-      LayoutAnimation.create(
-        500,
-        LayoutAnimation.Types.easeInEaseOut,
-        LayoutAnimation.Properties.opacity
-      )
-    );
+    if(user) {
+      const savedUser = await addUser(user);
 
-    props.dispatch({
-      type: 'setCurrentUser',
-      user
-    })
+      LayoutAnimation.configureNext(
+        LayoutAnimation.create(
+          500,
+          LayoutAnimation.Types.easeInEaseOut,
+          LayoutAnimation.Properties.opacity
+        )
+      );
+
+      props.dispatch({
+        type: 'setCurrentUser',
+        user: savedUser
+      });
+    }
   }
 
   const handleGenerateUsername = async () => {

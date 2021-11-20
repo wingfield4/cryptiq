@@ -6,6 +6,7 @@ import UserList from '../users/UserList';
 
 import api from '../../utilities/api';
 import addContact from '../../db/contacts/addContact';
+import addUserIfNotExists from '../../db/users/addUserIfNotExists';
 
 const NewContact = (props) => {
   const [username, setUsername] = useState('');
@@ -23,9 +24,11 @@ const NewContact = (props) => {
     setLoading(true);
     setUsers(null);
 
-    const foundUsers = await api.searchForUser({
-      username
-    });
+    const foundUsers = await api.searchForUsers({
+        username
+      })
+      .then(async res => await Promise.all(res.data.map(async user => await addUserIfNotExists(user.id, user))))
+      .catch(err => console.log(err));
 
     setLoading(false);
     setUsers(foundUsers);

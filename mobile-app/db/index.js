@@ -26,6 +26,7 @@ class Database {
     await this.executeSql(`
       CREATE TABLE IF NOT EXISTS user (
         id TEXT PRIMARY KEY,
+        serverId INTEGER,
         username TEXT,
         publicKey TEXT,
         firstName TEXT,
@@ -39,6 +40,7 @@ class Database {
     await this.executeSql(`
       CREATE TABLE IF NOT EXISTS message (
         id TEXT PRIMARY KEY,
+        serverId INTEGER,
         content TEXT,
         sentAt TEXT,
         sentFrom TEXT,

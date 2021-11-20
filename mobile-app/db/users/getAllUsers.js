@@ -25,9 +25,12 @@ const getAllUsers = async () => {
         ORDER BY m.sentAt desc
         LIMIT 1
       ) as mostRecentInteraction
-    FROM user u
+    FROM user u 
+    WHERE u.id != ?
     ORDER BY mostRecentInteraction desc;
   `, [
+    thisUserId,
+    thisUserId,
     thisUserId,
     thisUserId
   ]);

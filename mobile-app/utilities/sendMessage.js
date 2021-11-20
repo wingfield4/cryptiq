@@ -10,8 +10,8 @@ import updateMessage from '../db/messages/updateMessage';
 const sendMessage = async ({ content, sender, receiver }) => {
   const baseMessage = {
     id: generateId(),
-    sentFrom: sender.id,
-    sentTo: receiver.id
+    sentFrom: sender.serverId || sender.id,
+    sentTo: receiver.serverId || receiver.id
   };
 
   //create a message to save here, encrypted for sender
@@ -21,22 +21,26 @@ const sendMessage = async ({ content, sender, receiver }) => {
   }
 
   //add the local message to our sqlitie db
-  await addMessage(localMessage);
+  await addMessage(localMessage, true);
 
   //create a message to send, encrypted for receiver
   const encryptedContent = await encryptMessage(content, receiver.publicKey);
   const outgoingMessage = {
     ...baseMessage,
+    id: undefined,
     encryptedContent,
     signature: await getSignature(encryptedContent),
   }
 
   //send the outgoing message to the server
   //TODO handle error
-  return api.sendMessage(outgoingMessage).then(() => updateMessage({
-    id: baseMessage.id,
-    sentAt: moment().format()
-  }));
+  return api.sendMessage(outgoingMessage)
+    .then(res => updateMessage({
+      id: baseMessage.id,
+      serverId: res.data.id,
+      sentAt: res.data.sentAt
+    }))
+    .catch(err => console.log(err));
 }
 
 export default sendMessage;

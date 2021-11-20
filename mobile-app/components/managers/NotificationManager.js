@@ -4,35 +4,24 @@ import { connect } from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
 
 import api from '../../utilities/api';
+import addMessage from '../../db/messages/addMessage';
+import addUserIfNotExists from '../../db/users/addUserIfNotExists';
+import decryptMessage from '../../utilities/crypto/decryptMessage';
+import generateId from '../../utilities/generateId';
 
 const NotificationManager = ({ currentUser }) => {
-  // useEffect(() => {
-  //   PushNotificationIOS.addEventListener('register', token => {
-  //     api.registerIOSDevice({ token, userId: currentUser.id });
-  //   });
-
-  //   PushNotificationIOS.addEventListener('registrationError', registrationError => {
-  //     console.log(registrationError)
-  //   });
-
-  //   // TODO handle notifications in-app
-
-  //   PushNotificationIOS.requestPermissions();
-  // }, [])
+  /* HANDLES PERMISSIONS AND REGISTERING TOKEN */
   useEffect(async () => {
     const authStatus = await messaging().requestPermission();
 
     const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
     if (enabled) {
-      console.log('Authorization status:', authStatus);
-
       // Get the device token
-      let token = await messaging().getToken();
+      let deviceToken = await messaging().getToken();
 
-      if(token) {
-        console.log('token', token);
-        api.registerIOSDevice({ token, userId: currentUser.id });
+      if(deviceToken) {
+        api.registerDevice({ deviceToken, userId: currentUser.serverId });
       }
 
       messaging().setBackgroundMessageHandler(async remoteMessage => {
@@ -46,11 +35,28 @@ const NotificationManager = ({ currentUser }) => {
     });
   }, [])
 
+  /* HANDLE MESSAGE EVENTS */
   useEffect(() => {
+    const handleMessage = async (remoteMessage) => {
+      const sentFromUserId = parseInt(remoteMessage.data.sentFrom, 10);
+      await addUserIfNotExists(sentFromUserId);
+      
+      await addMessage({
+        id: generateId(),
+        serverId: parseInt(remoteMessage.data.id, 10),
+        content: await decryptMessage(remoteMessage.data.encryptedContent),
+        sentAt: remoteMessage.data.sentAt,
+        sentFrom: sentFromUserId,
+        sentTo: parseInt(remoteMessage.data.sentTo, 10),
+        receivedAt: remoteMessage.data.receivedAt,
+        readAt: remoteMessage.data.readAt
+      });
+    }
+
     /* HANDLE BACKGROUND STATE NOTIFICATION */
     messaging().onNotificationOpenedApp(remoteMessage => {
-      console.log('Notification caused app to open from background state:', remoteMessage.notification);
-      //TODO redirect to message chain or overview
+      handleMessage(remoteMessage);
+      //handle redirect?
     });
 
     /* HANDLE CLOSED STATE NOTIFICATION */
@@ -64,10 +70,7 @@ const NotificationManager = ({ currentUser }) => {
       });
 
     /* HANDLE ACTIVE STATE NOTIFICATION */
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      console.log('New message: ', remoteMessage);
-      //handle message
-    });
+    const unsubscribe = messaging().onMessage(handleMessage);
 
     return unsubscribe;
   }, [])

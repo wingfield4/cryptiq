@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-//import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import { useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
 
@@ -10,6 +10,8 @@ import decryptMessage from '../../utilities/crypto/decryptMessage';
 import generateId from '../../utilities/generateId';
 
 const NotificationManager = ({ currentUser }) => {
+  const navigation = useNavigation();
+
   /* HANDLES PERMISSIONS AND REGISTERING TOKEN */
   useEffect(async () => {
     const authStatus = await messaging().requestPermission();
@@ -37,9 +39,9 @@ const NotificationManager = ({ currentUser }) => {
 
   /* HANDLE MESSAGE EVENTS */
   useEffect(() => {
-    const handleMessage = async (remoteMessage) => {
+    const handleMessage = async (remoteMessage, navigateToConversation = false) => {
       const sentFromUserId = parseInt(remoteMessage.data.sentFrom, 10);
-      await addUserIfNotExists(sentFromUserId);
+      let user = await addUserIfNotExists(sentFromUserId);
       
       await addMessage({
         id: generateId(),
@@ -51,11 +53,14 @@ const NotificationManager = ({ currentUser }) => {
         receivedAt: remoteMessage.data.receivedAt,
         readAt: remoteMessage.data.readAt
       });
+
+      if(navigateToConversation)
+        navigation.navigate('Conversation', { user });
     }
 
     /* HANDLE BACKGROUND STATE NOTIFICATION */
     messaging().onNotificationOpenedApp(remoteMessage => {
-      handleMessage(remoteMessage);
+      handleMessage(remoteMessage, true);
       //handle redirect?
     });
 
@@ -64,16 +69,15 @@ const NotificationManager = ({ currentUser }) => {
       .getInitialNotification()
       .then(remoteMessage => {
         if (remoteMessage) {
-          console.log('Notification caused app to open from quit state:', remoteMessage.notification);
-          //TODO redirect to message chain or overview
+          handleMessage(remoteMessage, true);
         }
       });
 
     /* HANDLE ACTIVE STATE NOTIFICATION */
-    const unsubscribe = messaging().onMessage(handleMessage);
+    const unsubscribe = messaging().onMessage(remoteMessage => handleMessage(remoteMessage));
 
     return unsubscribe;
-  }, [])
+  }, [navigation])
 
   return (
     <></>

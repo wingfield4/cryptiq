@@ -15,10 +15,11 @@ import Icon from '../../components/common/Icon';
 const MainTabs = () => {
   return (
     <>
-      {/* managers for logged-in users */}
-      {/* <ConnectionManager /> */}
-      <NotificationManager />
       <NavigationContainer>
+        {/* managers for logged-in users */}
+        {/* <ConnectionManager /> */}
+        <NotificationManager />
+        
         <Tab.Navigator
           initialRouteName="Conversations"
           backBehavior="none"

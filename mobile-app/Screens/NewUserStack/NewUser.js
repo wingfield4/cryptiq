@@ -37,15 +37,19 @@ const NewUser = (props) => {
     setLoading(true);
     const publicKey = await generateKeys({ username });
 
-    const user = await api.createUser({
-        username,
-        publicKey,
-        firstName,
-        middleName,
-        lastName,
-        email,
-        phone
-      })
+    let userData = {
+      username, //never empty
+      publicKey: publicKey || null,
+      firstName: firstName || null,
+      middleName: middleName || null,
+      lastName: lastName || null,
+      email: email || null,
+      phone: phone  || null
+    };
+
+    console.log('userData', userData);
+
+    const user = await api.createUser(userData)
       .then(res => res.data)
       .catch(err => console.log(err));
     
